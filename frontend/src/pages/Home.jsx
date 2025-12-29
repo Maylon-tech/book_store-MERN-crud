@@ -14,7 +14,7 @@ const Home = () => {
     setLoading(true)
 
     axios
-      .get('http://localhost:5555/books')
+      .get('http://localhost:8000/books')
       .then((res) => {
         setBooks(res.data.data)
         setLoading(false)
@@ -69,7 +69,7 @@ const Home = () => {
                         {book.publishYear}
                       </td>
                       <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                        <div className="">
+                        <div className="flex items-center justify-center gap-4">
                           <Link to={`/books/details${book._id}`}>
                             <BsInfoCircle className='text-2xl text-green-800' />
                           </Link>
