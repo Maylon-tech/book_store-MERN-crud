@@ -17,7 +17,6 @@ function App() {
         <Route path="/books/edit/:id" element={ <EditBook /> } />
         <Route path="/books/delete/:id" element={ <DeleteBook /> } />
       </Routes>
-      <h1 className="text-3xl mx-auto text-orange-500">Nemoto Developer 2026</h1>  
     </>
   )
 }
