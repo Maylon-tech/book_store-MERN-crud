@@ -3,13 +3,17 @@ import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner"
 import axios from 'axios'
 import { useNavigate, useParams } from "react-router-dom"
+import { useSnackbar } from 'notistack'
 
 const EditBook = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [publishYear, setPublishYear] = useState('')
+  const [sinopse, setSinopse] = useState('')
+  const [description, setDescription] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { enqueueSnackbar } = useSnackbar()
   const { id } = useParams()
 
   useEffect(() => {
@@ -34,18 +38,22 @@ const EditBook = () => {
     const data = {
       title,
       author,
-      publishYear
+      publishYear,
+      sinopse,
+      description
     }
     setLoading(true)
     axios
       .put(`http://localhost:8000/books/${id}`, data)
       .then(() => {
         setLoading(false)
+        enqueueSnackbar("Book Edited Successfully.", { variant: 'info' })
         navigate('/')
       })
       .catch((error) => {
         setLoading(false)
         alert("An Error happened. Please Check console..")
+        enqueueSnackbar("Error", { variant: 'error' })
         console.log(error)
       })
   }
@@ -83,6 +91,24 @@ const EditBook = () => {
             type="number"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+         <div className="my-4">
+          <label htmlFor="" className="text-xl mr-4 text-gray-500">Sinopse</label>
+          <input
+            type="text"
+            value={sinopse}
+            onChange={(e) => setSinopse(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+        <div className="my-4">
+          <label htmlFor="" className="text-xl mr-4 text-gray-500">Description</label>
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>

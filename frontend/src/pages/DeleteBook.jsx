@@ -4,10 +4,12 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
+import { useSnackbar } from 'notistack'
 
 const DeleteBook = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { enqueueSnackbar } = useSnackbar()
   const { id } = useParams()
 
   const handleDeleteBook = () => {
@@ -16,11 +18,13 @@ const DeleteBook = () => {
       .delete(`http://localhost:8000/books/${id}`)
       .then(() => {
         setLoading(false)
+        enqueueSnackbar("Book Deleted Successfully.", { variant: 'warning' })
         navigate("/")
       })
       .catch((error) => {
         setLoading(false)
         alert("An error happened. Please Check console.")
+        enqueueSnackbar("Error", { variant: 'error' })
         console.log(error)
       })
   }

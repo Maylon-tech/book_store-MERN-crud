@@ -7,7 +7,9 @@ export const CreateBook = async (req, res) => {
         if (
             !req.body.title ||
             !req.body.author ||
-            !req.body.publishYear
+            !req.body.publishYear ||
+            !req.body.sinopse ||
+            !req.body.description 
         ) {
             return res.status(400).send({
                 message: "Send all required fields: title, author, publishYear",
@@ -17,6 +19,8 @@ export const CreateBook = async (req, res) => {
             title: req.body.title,
             author: req.body.author,
             publishYear: req.body.publishYear,
+            sinopse: req.body.sinopse,
+            description: req.body.description,
         }
 
         const book = await Book.create(newBook)
@@ -60,7 +64,9 @@ export const updateBook = async (req, res) => {
         if (
             !req.body.title ||
             !req.body.author ||
-            !req.body.publishYear
+            !req.body.publishYear ||
+            !req.body.sinopse ||
+            !req.body.description 
         ) {
             return res.status(400).send({
                 message: "Send all required fields: title, author, publishYear",

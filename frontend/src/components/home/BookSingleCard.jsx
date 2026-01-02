@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PiBookOpenTextLight } from 'react-icons/pi'
-import { BiUserCircle } from 'react-icons/bi'
+import { BiUserCircle, BiShow } from 'react-icons/bi'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { BsInfoCircle } from 'react-icons/bs'
 import { MdOutlineDelete } from 'react-icons/md'
@@ -11,10 +11,9 @@ import BookModal from './BookModal'
 const BookSingleCard = ({ book }) => {
     const [showModal, setShowModal] = useState(false)
 
-
   return (
     <div
-        className="border-1 border-gray-500 bg-slate-200/50 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
+        className="border-2 border-gray-500 bg-slate-200/50 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
     >
         <h2 className="absolute top-1 right-2 px-4 py-1 bg-red-500 rounded-sm">
             { book.publishYear }
@@ -42,7 +41,7 @@ const BookSingleCard = ({ book }) => {
                 <BsInfoCircle className='text-green-800 text-2xl hover:text-black' />
             </Link>
             
-            <Link to={`/books/eidt/${book._id}`}>
+            <Link to={`/books/edit/${book._id}`}>
                 <AiOutlineEdit className='text-yellow-600 text-2xl hover:text-black' />
             </Link>
             <Link to={`/books/delete/${book._id}`}>
